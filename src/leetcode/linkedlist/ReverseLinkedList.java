@@ -1,5 +1,8 @@
 package leetcode.linkedlist;
 
+/**
+ * Recursive and non recursive version of reversing a linked list.
+ */
 public class ReverseLinkedList {
 
     public static void main(String[] args) {
@@ -26,24 +29,42 @@ public class ReverseLinkedList {
         }
     }
 
-    private static ListNode reverse(ListNode currentNode) {
-        if (currentNode.next == null) {
-            return currentNode;
-        }
-
-
-        ListNode updatedHead = reverse(currentNode.next);
-        currentNode.next.next = currentNode;
-        currentNode.next = null;
-        System.out.println("Head value" + updatedHead.val);
-        return updatedHead;
-    }
-
+    // Recursive option.
     public static ListNode reverseList(ListNode head) {
-        if (head == null) {
+        if(head == null) {
             return null;
         }
-        return reverse(head);
+        if(head.next == null) {
+            ListNode tail = head;
+            return tail;
+        }
+
+        ListNode tail = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return tail;
     }
+
+
+
+
+    /*
+    Non recursive version
+    */
+
+//      public ListNode reverseList(ListNode head) {
+
+//          ListNode prev= null;
+//          ListNode nextNode = null;
+
+//          while(head != null) {
+//              nextNode = head.next;
+//              head.next = prev;
+//              prev = head;
+//              head=nextNode;
+//          }
+
+//         return prev;
+//     }
 
 }
